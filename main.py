@@ -21,10 +21,7 @@ food = Food()
 scoreboard = Scoreboard()
 
 screen.listen()
-screen.onkey(snake.up, "Up")
-screen.onkey(snake.down, "Down")
-screen.onkey(snake.left, "Left")
-screen.onkey(snake.right, "Right")
+
 
 
 game_is_on = True
@@ -32,6 +29,10 @@ game_is_on = True
 while game_is_on:
     screen.update()
     time.sleep(0.1)
+    screen.onkey(snake.up, "Up")
+    screen.onkey(snake.down, "Down")
+    screen.onkey(snake.left, "Left")
+    screen.onkey(snake.right, "Right")
     snake.move()
 
     if snake.head.distance(food) < 15:
@@ -43,10 +44,8 @@ while game_is_on:
         game_is_on = False
         scoreboard.gameover()
 
-    for s in snake.segment:
-        if s == snake.head:
-            pass
-        elif snake.head.distance(s) < 10:
+    for s in snake.segment[1:]:
+        if snake.head.distance(s) < 10:
             game_is_on = True
             scoreboard.gameover()
     
